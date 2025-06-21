@@ -1,4 +1,4 @@
-```markdown
+
 # Parking Slot Management System
 
 ## 🚀 Overview
@@ -271,4 +271,3 @@ To get this microservices system up and running, you will need to start each ser
 
 * **Development-Time Security:** The `SecurityConfig.java` currently has `"/api/slots/**"` set to `permitAll()`. This means all parking slot API endpoints are publicly accessible without authentication.
 * **Production Readiness:** For a production environment, this `permitAll()` configuration is **not secure**. You would typically implement robust authentication (e.g., using JWTs in conjunction with your User Management module) and authorization (role-based access control) to restrict access to these endpoints based on user roles (e.g., only admins can add/remove slots, only authenticated users can view available slots). This setup allows for easier development and testing of individual services.
-````
