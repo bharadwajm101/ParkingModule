@@ -126,8 +126,6 @@ sequenceDiagram
     ParkingSlotService-->>API Gateway: Booking confirmation response
     API Gateway-->>User: Return response
 ```
-```
-
 ### 4.3 Swagger Documentation
 
 Comprehensive API documentation is available via Swagger UI, typically accessible at:  
@@ -139,71 +137,16 @@ Comprehensive API documentation is available via Swagger UI, typically accessibl
 | HTTP Method | Endpoint                                    | Description                                                     |
 |-------------|---------------------------------------------|-----------------------------------------------------------------|
 | POST        | `/api/slots`                                | Create a new parking slot                                       |
-| PUT         | `/api/slots/{slotId}`                        | Update an existing parking slot                                 |
-| DELETE      | `/api/slots/{slotId}`                        | Remove a parking slot                                           |
+| PUT         | `/api/slots/{slotId}`                       | Update an existing parking slot                                 |
+| DELETE      | `/api/slots/{slotId}`                       | Remove a parking slot                                           |
 | GET         | `/api/slots`                                | Retrieve all parking slots                                      |
-| GET         | `/api/slots/available`                       | Retrieve all available parking slots                            |
-| GET         | `/api/slots/occupancy-status`                | Get a summary of occupancy (occupied vs. available)             |
-| GET         | `/api/slots/type/{type}`                     | Retrieve parking slots filtered by type                         |
-| GET         | `/api/slots/{slotId}`                        | Retrieve parking slot details by ID                             |
+| GET         | `/api/slots/available`                      | Retrieve all available parking slots                            |
+| GET         | `/api/slots/occupancy-status`               | Get a summary of occupancy (occupied vs. available)             |
+| GET         | `/api/slots/type/{type}`                    | Retrieve parking slots filtered by type                         |
+| GET         | `/api/slots/{slotId}`                       | Retrieve parking slot details by ID                             |
 | PATCH       | `/api/slots/{slotId}/occupancy?isOccupied={status}` | Change the occupancy status of a parking slot (true/false)        |
----
-
-## 5. Error Handling
-
-Spring Boot’s global exception handling returns appropriate HTTP codes for clear client communication.
-
-### 5.1 Common Error Codes
-
-| Error Code | Description                             |
-|------------|-----------------------------------------|
-| 200        | OK (e.g., successful operation)         |
-| 204        | No Content (e.g., successful deletion)  |
-| 400        | Bad Request (e.g., invalid input)       |
-| 401        | Unauthorized (e.g., authentication required) |
-| 404        | Not Found (e.g., user doesn't exist)    |
-| 500        | Internal Server Error                  |
 
 ---
-
-## 6. Dependencies
-
-### 6.1 Key Dependencies
-
-### 6.1 Key Dependencies
-
-- **spring-boot-starter-web**: Provides essential libraries for building RESTful web services and web applications.  
-- **spring-boot-starter-data-jpa**: Simplifies database interactions using JPA and Hibernate.  
-- **mysql-connector-java**: Enables connectivity with MySQL database for production and development environments.  
-- **lombok**: Reduces boilerplate code by generating getters, setters, and constructors.  
-- **junit**, **mockito**: Enables unit testing and mocking for robust application testing.  
-
----
-
-## 7. Deployment
-
-### 7.1 Key Configuration
-
-Defined in `application.properties`:
-
-```properties
-spring.application.name=parking-slot-service
-
-server.port=8082
-
-spring.datasource.url=jdbc:mysql://localhost:3306/parking_db
-spring.datasource.username=root
-spring.datasource.password=root
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
-spring.jpa.hibernate.ddl-auto=update
-spring.jpa.show-sql=true
-
-eureka.client.service-url.defaultZone=http://localhost:8761/eureka/
-eureka.instance.prefer-ip-address=true
-eureka.instance.hostname=localhost
-eureka.instance.instance-id=${spring.application.name}:${spring.application.instance_id:${random.value}}
-
-```
 
 ### 7.2 Deployment Steps
 
