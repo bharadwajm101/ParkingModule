@@ -45,6 +45,32 @@ The system is comprised of three main Spring Boot microservices:
         * **API Documentation:** Configured via `parking-slot-service/src/main/java/com/parking/parking_slot_service/config/SwaggerConfig.java`
         * **Security Configuration:** `parking-slot-service/src/main/java/com/parking/parking_slot_service/config/SecurityConfig.java`
 
+```mermaid
+graph TD
+    subgraph "Service Registry & Discovery"
+      Eureka[Eureka Server]
+    end
+    subgraph "API Gateway"
+      APIGW[API Gateway]
+    end
+    subgraph "Microservices"
+      Parking[Parking-Slot Service]
+      Other[Other Microservice]
+    end
+    subgraph "Data Storage"
+      DB[(MySQL Database)]
+    end
+    APIGW -->|Routes Requests| Parking
+    APIGW -- Registers With --> Eureka
+    APIGW -->|Routes Requests| Other
+    Parking -->|Registers with| Eureka
+    Other -->|Registers with| Eureka
+    Parking -->|JPA Calls| DB
+    Other -->|JPA Calls| DB
+    Eureka --- APIGW
+```
+
+
 ### Component Interaction
 
 * **Frontend (Conceptual, not in this repo):** An Angular or React frontend (as per LLD) would interact solely with the **Gateway Service**.
@@ -106,6 +132,21 @@ Understanding how data moves through the system is key to grasping the microserv
 4.  ### **Response Flow**
     * Once the `Parking Slot Service` processes the request and retrieves/manipulates the data, it sends the response (typically as a `ParkingSlotDTO` or a list of `ParkingSlotDTO`s) back to the `Gateway Service`.
     * The `Gateway Service` then forwards this response directly back to the original client.
+  
+```mermaid
+graph LR
+    Controller[ParkingSlotController]
+    Service[ParkingSlotService & Implementation]
+    Repository[ParkingSlotRepository]
+    DTOs[Data Transfer Objects]
+    Entity[Entity Classes]
+    Config[Security & Swagger Config]
+    Controller --> Service
+    Service --> Repository
+    Service --> DTOs
+    Repository --> Entity
+    Controller --- Config
+```
 
 ## 🚦 API Endpoints (Parking Slot Service)
 
@@ -193,6 +234,24 @@ The `Parking Slot Service` exposes a comprehensive set of RESTful API endpoints 
     * **Query Parameter:** `isOccupied` (e.g., `?isOccupied=true` or `?isOccupied=false`)
     * **Example Usage:** `PATCH /api/slots/123/occupancy?isOccupied=true`
     * **Response:** The updated `ParkingSlotDTO` object.
+
+```mermaid
+flowchart TD
+    Client[Client Request]
+    APIGW[API Gateway]
+    Parking[Parking-Slot Service]
+    Eureka[Eureka Server]
+    DB[(MySQL Database)]
+
+    Client --> APIGW
+    APIGW -->|Service Discovery| Eureka
+    Eureka --> APIGW
+    APIGW --> Parking
+    Parking --> DB
+    DB --> Parking
+    Parking --> APIGW
+    APIGW --> Client
+```
 
 ## 🛠️ Key Technologies & Concepts
 
