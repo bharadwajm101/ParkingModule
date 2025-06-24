@@ -94,7 +94,7 @@ graph TD
 
 - **Eureka Discovery Service:**  
   Facilitates service discovery and registration, enabling seamless communication between microservices in a distributed architecture.
-```
+
 
 ### 2.2 Technologies Used
 
