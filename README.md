@@ -62,10 +62,6 @@ The `User-Service` is built using **Spring Boot** with a **layered architecture*
 
 ### 2.1 Component Diagram
 
-
-```markdown
-### 2.2 Component Diagram
-
 ```mermaid
 graph TD
     A[User-Service] --> B[User Controller]
