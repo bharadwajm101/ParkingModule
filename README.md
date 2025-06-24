@@ -62,6 +62,10 @@ The `User-Service` is built using **Spring Boot** with a **layered architecture*
 
 ### 2.1 Component Diagram
 
+
+```markdown
+### 2.2 Component Diagram
+
 ```mermaid
 graph TD
     A[User-Service] --> B[User Controller]
@@ -69,6 +73,27 @@ graph TD
     C --> D[User Repository]
     D --> E[User Database]
     A --> F[Eureka Discovery Service]
+```
+
+### Layer Descriptions
+
+- **User-Service:**  
+  Acts as the entry point for the module, exposing RESTful APIs for external communication. It integrates with Eureka Discovery Service for service registration and discovery.
+
+- **User Controller:**  
+  Handles incoming HTTP requests and maps them to appropriate service methods. It serves as the interface between the client and the business logic.
+
+- **User Service:**  
+  Contains the core business logic of the application. It processes requests, applies validations, and interacts with the repository layer for data persistence.
+
+- **User Repository:**  
+  Responsible for database operations. It abstracts the data access layer and provides methods to interact with the User Database.
+
+- **User Database:**  
+  Stores user-related data such as user profiles, credentials, and preferences. It ensures data integrity and supports CRUD operations.
+
+- **Eureka Discovery Service:**  
+  Facilitates service discovery and registration, enabling seamless communication between microservices in a distributed architecture.
 ```
 
 ### 2.2 Technologies Used
