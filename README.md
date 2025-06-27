@@ -10,8 +10,7 @@ This document provides a detailed low-level overview of the `Parking Slot Manage
     * [Features](#11-features)  
 2. [Architecture](#2-architecture)  
     * [Component Diagram](#21-component-diagram)  
-    * [Sequence Diagram](#22-sequence-diagram)  
-    * [Technologies Used](#23-technologies-used)  
+    * [Sequence Diagram](#22-sequence-diagram)   
 3. [Database Design](#3-database-design)  
     * [Parking Slot Table](#31-parking-slot-table)  
 4. [API Endpoints](#4-api-endpoints)  
@@ -32,32 +31,25 @@ The **parking-slot-service** module is a core component of the Parking Managemen
 
 ### 1.1 Features
 
-#### Add Parking Slot
-- Registers a new parking slot with type and location.
+#### Manage Parking Slot Inventory
+- Allows adding, updating, and removing parking slots.
+- Ensures data integrity and validation during slot operations.
 
-#### Update Parking Slot
-- Updates slot details such as type, location, and occupancy.
+#### Retrieve Parking Slot Details
+- Fetches details of specific parking slots using slot ID.
+- Provides information such as slot type, occupancy status, and location.
 
-#### Remove Parking Slot
-- Deletes a parking slot by its ID.
+#### Retrieve All Parking Slots
+- Enables fetching all parking slots in the system.
+- Supports filtering by slot type and occupancy status for efficient data handling.
 
-#### Retrieve All Slots
-- Fetches all parking slots in the system.
+#### Update Occupancy Status
+- Updates the occupancy status of a parking slot.
+- Ensures accurate tracking of slot availability.
 
-#### Retrieve Available Slots
-- Fetches only unoccupied slots.
-
-#### Retrieve Slots by Type
-- Fetches slots filtered by type (e.g., 2W, 4W).
-
-#### Retrieve Slot by ID
-- Fetches details of a specific slot.
-
-#### Change Occupancy Status
-- Updates the occupancy status (occupied/available) of a slot.
-
-#### Get Occupancy Status Summary
-- Returns the count of occupied and available slots.
+#### Retrieve Occupancy Summary
+- Provides a summary of occupied and available slots.
+- Helps in monitoring parking slot utilization effectively.
 
 ---
 
@@ -128,18 +120,6 @@ sequenceDiagram
     ParkingSlotService-->>API Gateway: Response with slot details
     API Gateway-->>Staff: Response with slot details
 ```
----
-
-### 2.3 Technologies Used
-
-- **Framework:** Spring Boot (REST API, JPA)  
-- **Database:** MySQL  
-- **Language:** Java  
-- **Build Tool:** Maven  
-- **Boilerplate Reduction:** Lombok  
-- **Service Discovery:** Spring Cloud Netflix Eureka  
-- **API Documentation:** SpringDoc OpenAPI (Swagger UI)   
-
 ---
 
 ## 3. Database Design
